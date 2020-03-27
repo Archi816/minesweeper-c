@@ -14,7 +14,6 @@ int load_score_to_list(Player list_of_players[]) {
     FILE *file = fopen(hof_file, "r");
 
     if (file == NULL) {
-        fopen(hof_file, "w");
         return -1;
     }
     int index_of_player = 0;

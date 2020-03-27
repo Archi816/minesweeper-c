@@ -18,6 +18,13 @@ TEST load_file_over_limit() {
     PASS();
 }
 
+TEST load_nonexistent_file() {
+    set_hof_file_name("tests/score/nonexistent");
+    Player list_of_players[PLAYERS_LIMIT];
+    ASSERT_EQ(-1, load_score_to_list(list_of_players));
+    PASS();
+}
+
 TEST compare_loaded_and_saved_players() {
     Player list_of_players[PLAYERS_LIMIT] = {
             {"peter", 99},
