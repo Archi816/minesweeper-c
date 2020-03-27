@@ -5,7 +5,7 @@ TEST load_file_number_of_players() {
     set_hof_file_name("tests/score/optimal_size");
     Player list_of_players[PLAYERS_LIMIT];
 
-    ASSERT_EQ(load_score_to_list(list_of_players), 5);
+    ASSERT_EQ(5, load_score_to_list(list_of_players));
     PASS();
 }
 
@@ -14,7 +14,7 @@ TEST load_file_over_limit() {
     int high_size_of_list = PLAYERS_LIMIT + 5;
     Player list_of_players[high_size_of_list];
 
-    ASSERT_EQ(load_score_to_list(list_of_players), PLAYERS_LIMIT);
+    ASSERT_EQ(PLAYERS_LIMIT, load_score_to_list(list_of_players));
     PASS();
 }
 
@@ -86,7 +86,7 @@ TEST add_player_to_optimal_list() {
 
     int size_before_adding = size;
     add_player_to_list(list_of_players, &size, *player);
-    ASSERT_EQ(size, size_before_adding + 1);
+    ASSERT_EQ(size_before_adding + 1, size);
     free(player);
     remove("tests/score/for_saving");
     PASS();

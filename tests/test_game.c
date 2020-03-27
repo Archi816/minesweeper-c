@@ -46,7 +46,7 @@ TEST count_score_after_move() {
         if (!game->board->tiles[row][column]->is_mine) {
             open_tile(game, row, column);
             score += game->board->tiles[row][column]->value;
-            ASSERT_EQ(game->player->score, score);
+            ASSERT_EQ(score, game->player->score);
             is_closed_tile_open = true;
         }
     }
@@ -64,7 +64,7 @@ TEST count_score_when_game_failed() {
         for (int column = 0; column < game->board->column_count; column++) {
             if (game->board->tiles[row][column]->is_mine) {
                 open_tile(game, row, column);
-                ASSERT_EQ(game->player->score, 15);
+                ASSERT_EQ(15, game->player->score);
                 break;
             }
         }
