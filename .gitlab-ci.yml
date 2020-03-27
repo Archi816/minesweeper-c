@@ -1,0 +1,14 @@
+default:
+  image: gcc:9
+
+build:
+  script:
+    - make
+
+test:
+  before_script:
+    - apt-get -qq update
+    - apt-get -qq install -y gcovr
+  script:
+    - make test
+    - gcovr -e tests
