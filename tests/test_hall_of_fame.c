@@ -48,8 +48,8 @@ TEST compare_loaded_and_saved_players() {
     remove("tests/score/for_saving");
 }
 
-TEST save_player_to_list_invalid() {
-    Player list_of_players[11] = {
+TEST save_player_to_full_list() {
+    Player list_of_players[PLAYERS_LIMIT] = {
             {"peter", 99},
             {"jozo",  55},
             {"alena", 43},
@@ -97,6 +97,6 @@ SUITE (test_hall_of_fame) {
     RUN_TEST(load_file_over_limit);
     RUN_TEST(load_nonexistent_file);
     RUN_TEST(compare_loaded_and_saved_players);
-    RUN_TEST(save_player_to_list_invalid);
+    RUN_TEST(save_player_to_full_list);
     RUN_TEST(add_player_to_optimal_list);
 }
