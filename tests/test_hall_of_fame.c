@@ -95,6 +95,7 @@ TEST add_player_to_optimal_list() {
 SUITE (test_hall_of_fame) {
     RUN_TEST(load_file_number_of_players);
     RUN_TEST(load_file_over_limit);
+    RUN_TEST(load_nonexistent_file);
     RUN_TEST(compare_loaded_and_saved_players);
     RUN_TEST(save_player_to_list_invalid);
     RUN_TEST(add_player_to_optimal_list);
