@@ -6,7 +6,8 @@
 
 
 // hall of fame file name
-static char hof_file[] = "score";
+#define HOF_FILENAME_LENGTH 80
+static char hof_file[HOF_FILENAME_LENGTH] = "score";
 
 int load_score_to_list(Player list_of_players[]) {
 
@@ -56,5 +57,5 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
 }
 
 void set_hof_file_name(const char name[]) {
-    strcpy(hof_file, name);
+    strncpy(hof_file, name, HOF_FILENAME_LENGTH);
 }
