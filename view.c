@@ -14,6 +14,21 @@ void view_column_coordinates(StringBuilder *sb, int column_count);
 void view_tile(StringBuilder *sb, Tile *tile, bool is_mine_on_selected_tile);
 void view_value(StringBuilder *sb, int value);
 
+/** Return top score from list of players.
+ * @param players array of players and their score
+ * @param players_count size of the array
+ */
+char *view_hof(Player *players, int players_count) {
+    assert(players != NULL);
+    StringBuilder *sb = sb_create();
+    sb_appendf(sb, "%d hráčov, ktorí hrali túto hru.\n", players_count);
+    for (int index = 0; index < players_count; index++) {
+        sb_appendf(sb, "%s: %d\n", players[index].name, players[index].score);
+    }
+    return sb_concat_free(sb);
+}
+
+
 /**
  * Returns whole play field
  */

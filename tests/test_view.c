@@ -3,6 +3,23 @@
 #include "../view.h"
 #include "../termcolor.h"
 
+TEST view_nonempty_hof() {
+    int players_count = 3;
+    Player players[] = {
+        {"peter", 99},
+        {"jozo",  55},
+        {"alena", 43},
+    };
+    char *result = view_hof(players, players_count);
+    ASSERT_STR_EQ(
+            "3 hráčov, ktorí hrali túto hru.\n"
+            "peter: 99\n"
+            "jozo: 55\n"
+            "alena: 43\n",
+            result);
+    PASS();
+}
+
 TEST view_closed_board() {
     Board *board = create_board(4, 4, 0);
     char *field = view_play_field(board, 0, 0);
@@ -94,6 +111,7 @@ TEST view_multiple_opened_tiles() {
 
 
 SUITE (test_view) {
+    RUN_TEST(view_nonempty_hof);
     RUN_TEST(view_closed_board);
     RUN_TEST(view_opened_empty_board);
     RUN_TEST(view_open_mine);

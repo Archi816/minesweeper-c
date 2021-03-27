@@ -7,8 +7,8 @@
 #include "user_interface.h"
 #include "view.h"
 
-
 void print_play_field(Game *game, int input_row, int input_column);
+void print_score(Player *list_of_players, int number_of_all_players);
 
 /**
  * Prints rules for users input
@@ -17,21 +17,6 @@ void print_play_field(Game *game, int input_row, int input_column);
 void print_input_rules() {
     printf("Zadajte číslo riadka, medzeru a číslo stĺpca. Napr. 2 3, 5 9\n");
 }
-
-/**
- * Prints top score from list of players
- * @param number_of_all_players in te list
- */
-void print_score(Player *list_of_players, int number_of_all_players) {
-    assert(list_of_players != NULL);
-
-    printf("%d hráčov, ktorí hrali túto hru.\n", number_of_all_players);
-    for (int index = 0; index < number_of_all_players; index++) {
-        printf("%s: ", list_of_players[index].name);
-        printf("%d\n", list_of_players[index].score);
-    }
-}
-
 
 /**
  * Handles players input process
@@ -55,6 +40,13 @@ void game_loop(Game *game) {
 
     } while (game->game_state == PLAYING);
     print_play_field(game, input_row, input_column);
+}
+
+
+void print_score(Player *list_of_players, int number_of_all_players) {
+    char *text = view_hof(list_of_players, number_of_all_players);
+    printf("%s", text);
+    free(text);
 }
 
 
