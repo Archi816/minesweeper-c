@@ -70,6 +70,21 @@ TEST view_open_mine() {
     PASS();
 }
 
+TEST view_marked_tile() {
+    Board *board = create_board(4, 4, 0);
+    board->tiles[3][2]->tile_state = MARKED;
+    char *field = view_play_field(board, 0, 0);
+            ASSERT_STR_EQ("   1 2 3 4 \n"
+                          "1  - - - - \n"
+                          "2  - - - - \n"
+                          "3  - - - - \n"
+                          "4  - - ! - \n",
+                          field);
+    free(board);
+    free(field);
+            PASS();
+}
+
 
 TEST view_just_opened_mine() {
     Board *board = create_board(4, 4, 0);
@@ -118,6 +133,7 @@ SUITE (test_view) {
     RUN_TEST(view_closed_board);
     RUN_TEST(view_opened_empty_board);
     RUN_TEST(view_open_mine);
+    RUN_TEST(view_marked_tile);
     RUN_TEST(view_just_opened_mine);
     RUN_TEST(view_multiple_opened_tiles);
 }
