@@ -7,16 +7,54 @@
 #include "view.h"
 #include "str_utils.h"
 
+/* private functions */
+void game_loop(Game *game);
 void print_play_field(Game *game, int input_row, int input_column);
 void print_score(Player *list_of_players, int number_of_all_players);
+void print_input_rules();
+
 
 /**
- * Prints rules for users input
- * Shows example of input selection from user
+ * Ask a player for his name and store in the game.
  */
-void print_input_rules() {
-    printf("Zadajte číslo riadka, medzeru a číslo stĺpca. Napr. 2 3, 5 9\n");
+void read_player_name(Game *game) {
+    assert(game != NULL);
+    printf("Zadajte vaše meno prosím: \n");
+    char name_of_player[MAX_PLAYER_LENGTH];
+    fgets(name_of_player, MAX_PLAYER_LENGTH, stdin);
+    str_remove_spaces(name_of_player);
+    strcpy(game->player->name, name_of_player);
 }
+
+
+/**
+ * Handle whole process of the Game
+ */
+void play_game(Game *game) {
+    assert(game != NULL);
+
+    Player list_of_players[PLAYERS_LIMIT];
+    int size_of_list = load_score_to_list(list_of_players);
+    if (size_of_list > 0) {
+        print_score(list_of_players, size_of_list);
+    }
+    game_loop(game);
+
+    if (game->game_state == SOLVED) {
+        printf("Gratulujem %s. Riešenie je správne!\n", game->player->name);
+    } else {
+        printf("Ľutujem %s. Riešenie je nesprávne!\n", game->player->name);
+    }
+    printf("Vaše skóre je: %d\n", game->player->score);
+
+    bool is_player_added_to_list =
+            add_player_to_list(list_of_players, &size_of_list, *game->player);
+
+    if (is_player_added_to_list) {
+        save_players_to_file(list_of_players, size_of_list);
+    }
+}
+
 
 /**
  * Handles players input process
@@ -57,36 +95,6 @@ void print_play_field(Game *game, int input_row, int input_column) {
 }
 
 
-void read_player_name(Game *game) {
-    assert(game != NULL);
-    printf("Zadajte vaše meno prosím: \n");
-    char name_of_player[MAX_PLAYER_LENGTH];
-    fgets(name_of_player, MAX_PLAYER_LENGTH, stdin);
-    str_remove_spaces(name_of_player);
-    strcpy(game->player->name, name_of_player);
-}
-
-void play_game(Game *game) {
-    assert(game != NULL);
-
-    Player list_of_players[PLAYERS_LIMIT];
-    int size_of_list = load_score_to_list(list_of_players);
-    if (size_of_list > 0) {
-        print_score(list_of_players, size_of_list);
-    }
-    game_loop(game);
-
-    if (game->game_state == SOLVED) {
-        printf("Gratulujem %s. Riešenie je správne!\n", game->player->name);
-    } else {
-        printf("Ľutujem %s. Riešenie je nesprávne!\n", game->player->name);
-    }
-    printf("Vaše skóre je: %d\n", game->player->score);
-
-    bool is_player_added_to_list =
-            add_player_to_list(list_of_players, &size_of_list, *game->player);
-
-    if (is_player_added_to_list) {
-        save_players_to_file(list_of_players, size_of_list);
-    }
+void print_input_rules() {
+    printf("Zadajte číslo riadka, medzeru a číslo stĺpca. Napr. 2 3, 5 9\n");
 }
