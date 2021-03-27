@@ -21,4 +21,4 @@ test:
     - apt-get -qq install -y gcovr
   script:
     - make test
-    - gcovr -e tests
+    - gcovr -e tests -e sb
