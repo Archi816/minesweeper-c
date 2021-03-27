@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include "game.h"
-#include "user_interface.h"
+#include "ui.h"
 #include "board.h"
 
 int main() {

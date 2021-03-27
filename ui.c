@@ -3,7 +3,7 @@
 #include <assert.h>
 #include <stdlib.h>
 
-#include "user_interface.h"
+#include "ui.h"
 #include "view.h"
 #include "str_utils.h"
 

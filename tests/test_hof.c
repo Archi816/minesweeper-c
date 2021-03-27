@@ -1,5 +1,5 @@
 #include "greatest.h"
-#include "../hall_of_fame.h"
+#include "../hof.h"
 
 TEST load_file_number_of_players() {
     set_hof_file_name("tests/score/optimal_size");

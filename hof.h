@@ -1,5 +1,5 @@
-#ifndef _HOF_H
-#define _HOF_H
+#ifndef MINES_HOF_H
+#define MINES_HOF_H
 
 #include <stdbool.h>
 
@@ -40,4 +40,4 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
  */
 void set_hof_file_name(const char name[]);
 
-#endif
+#endif //MINES_HOF_H

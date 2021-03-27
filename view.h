@@ -2,7 +2,7 @@
 #define MINES_VIEW_H
 
 #include "board.h"
-#include "hall_of_fame.h"
+#include "hof.h"
 
 char *view_hof(Player *players, int players_count);
 

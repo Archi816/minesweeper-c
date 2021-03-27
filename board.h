@@ -1,5 +1,5 @@
-#ifndef _BOARD_H
-#define _BOARD_H
+#ifndef MINES_BOARD_H
+#define MINES_BOARD_H
 
 #define MAX_ROW_COUNT 30
 #define MAX_COLUMN_COUNT 30
@@ -54,4 +54,4 @@ bool is_input_data_correct(Board *board, int input_row, int input_column);
  */
 void open_all_mines(Board *board);
 
-#endif
+#endif //MINES_BOARD_H

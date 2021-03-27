@@ -1,4 +1,4 @@
-#include "hall_of_fame.h"
+#include "hof.h"
 #include <stdio.h>
 #include <stdbool.h>
 #include <string.h>

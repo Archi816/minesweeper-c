@@ -1,6 +1,6 @@
-#ifndef _GAME_H
-#define _GAME_H
-#include "hall_of_fame.h"
+#ifndef MINES_GAME_H
+#define MINES_GAME_H
+#include "hof.h"
 #include "board.h"
 
 typedef enum  {
@@ -34,4 +34,4 @@ void open_tile(Game *game, int input_row, int input_column);
  */
 void destroy_game(Game *game);
 
-#endif
+#endif //MINES_GAME_H
