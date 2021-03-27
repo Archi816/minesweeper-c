@@ -1,13 +1,14 @@
-#include "board.h"
-#include "color_term.h"
-#include "hall_of_fame.h"
-#include "game.h"
-#include "user_interface.h"
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
 #include <ctype.h>
+#include <stdlib.h>
 
+#include "user_interface.h"
+#include "view.h"
+
+
+void print_play_field(Game *game, int input_row, int input_column);
 
 /**
  * Prints rules for users input
@@ -31,68 +32,6 @@ void print_score(Player *list_of_players, int number_of_all_players) {
     }
 }
 
-/**
- * Enumerates columns beyond play field
- */
-void print_column_coordinates(int column_count) {
-
-    printf("\n   ");
-    for (int e = 1; e <= column_count; e++) {
-        printf("%d ", e);
-    }
-    printf("\n");
-}
-
-/**
- * Prints one single Tile
- */
-void print_tile(Tile *tile, bool is_mine_on_selected_tile) {
-    assert(tile != NULL);
-
-    if (tile->tile_state == OPEN && tile->is_mine) {
-        if (is_mine_on_selected_tile) {
-            // sets red mine just for mine on the input coordinates
-            set_terminal_color(color_for_value(tile->value));
-        }
-        printf("X");
-        set_terminal_color(COLOR_DEFAULT);
-    }
-    if (tile->tile_state == CLOSED) {
-        printf("-");
-    } else if (tile->tile_state == OPEN && !tile->is_mine) {
-        set_terminal_color(color_for_value(tile->value));
-        printf("%d", tile->value);
-        set_terminal_color(COLOR_DEFAULT);
-    } else if (tile->tile_state == MARKED) {
-        printf("!");
-    }
-}
-
-/**
- * Prints whole play field
- */
-void print_play_field(Game *game, int input_row, int input_column) {
-    assert(game != NULL);
-
-    print_column_coordinates(game->board->column_count);
-    int row_enumeration = 1;
-    for (int row = 0; row < game->board->row_count; row++) {
-        printf("%d  ", row_enumeration);
-
-        for (int column = 0; column < game->board->column_count; column++) {
-
-            if (row == input_row - 1 && column == input_column - 1) {
-                print_tile(game->board->tiles[row][column], true);
-            } else {
-                print_tile(game->board->tiles[row][column], false);
-            }
-            printf(" ");
-        }
-        row_enumeration++;
-        printf("\n");
-    }
-    printf("\n");
-}
 
 /**
  * Handles players input process
@@ -101,7 +40,6 @@ void print_play_field(Game *game, int input_row, int input_column) {
 void game_loop(Game *game) {
     assert(game != NULL);
     int input, input_row = -1, input_column = -1;
-
     do {
         print_play_field(game, input_row, input_column);
         print_input_rules();
@@ -118,6 +56,14 @@ void game_loop(Game *game) {
     } while (game->game_state == PLAYING);
     print_play_field(game, input_row, input_column);
 }
+
+
+void print_play_field(Game *game, int input_row, int input_column) {
+    char *field = view_play_field(game->board, input_row, input_column);
+    printf("\n%s\n", field);
+    free(field);
+}
+
 
 void read_player_name(Game *game) {
     assert(game != NULL);
@@ -153,22 +99,8 @@ void play_game(Game *game) {
     }
 }
 
-Color value_colors[] = {
-        COLOR_DEFAULT, COLOR_BOLD_RED, COLOR_GREEN,
-        COLOR_BOLD_MAGENTA, COLOR_CYAN, COLOR_MAGENTA,
-        COLOR_YELLOW, COLOR_BLUE, COLOR_BOLD_YELLOW
-};
-
-Color color_for_value(int value) {
-    if (value == -1) {
-        return COLOR_RED;
-    } else {
-        return value_colors[value];
-    }
-}
 
 void remove_spaces_from_name(char *name) {
-
     const char *character = name;
     do {
         while (isspace(*character)) {
