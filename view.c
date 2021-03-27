@@ -5,9 +5,8 @@
 #include "sb.h"
 
 Color value_colors[] = {
-        COLOR_DEFAULT, COLOR_BOLD_RED, COLOR_GREEN,
-        COLOR_BOLD_MAGENTA, COLOR_CYAN, COLOR_MAGENTA,
-        COLOR_YELLOW, COLOR_BLUE, COLOR_BOLD_YELLOW
+        COLOR_DEFAULT, COLOR_BLUE, COLOR_GREEN, COLOR_YELLOW, COLOR_BOLD_YELLOW,
+        COLOR_MAGENTA, COLOR_BOLD_MAGENTA, COLOR_RED, COLOR_BOLD_RED
 };
 
 void view_column_coordinates(StringBuilder *sb, int column_count);
@@ -78,7 +77,7 @@ void view_tile(StringBuilder *sb, Tile *tile, bool is_mine_on_selected_tile) {
     if (tile->tile_state == OPEN && tile->is_mine) {
         if (is_mine_on_selected_tile) {
             // sets red mine just for mine on the input coordinates
-            sb_append(sb, COLOR_RED "X" COLOR_DEFAULT);
+            sb_append(sb, COLOR_BOLD_RED "X" COLOR_DEFAULT);
         } else {
             sb_append(sb, "X");
         }

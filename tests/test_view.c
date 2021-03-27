@@ -79,7 +79,7 @@ TEST view_just_opened_mine() {
     char *field = view_play_field(board, x+1, y+1);
     ASSERT_STR_EQ("   1 2 3 4 \n"
                   "1  - - - - \n"
-                  "2  - - " COLOR_RED "X" COLOR_DEFAULT " - \n"
+                  "2  - - " COLOR_BOLD_RED "X" COLOR_DEFAULT " - \n"
                   "3  - - - - \n"
                   "4  - - - - \n",
                   field);
@@ -92,18 +92,21 @@ TEST view_multiple_opened_tiles() {
     Board *board = create_board(4, 4, 0);
     board->tiles[0][0]->is_mine = true;
     board->tiles[0][0]->tile_state = OPEN;
+    board->tiles[0][3]->tile_state = OPEN;
+    board->tiles[1][1]->value = 1;
     board->tiles[1][1]->tile_state = OPEN;
-    board->tiles[2][1]->value = 1;
-    board->tiles[2][1]->tile_state = OPEN;
-    board->tiles[3][2]->value = 2;
-    board->tiles[3][2]->tile_state = OPEN;
-    char *field = view_play_field(board, 0, 0);
-    ASSERT_STR_EQ("   1 2 3 4 \n"
-                  "1  X - - - \n"
-                  "2  - 0 - - \n"
-                  "3  - " COLOR_BOLD_RED "1" COLOR_DEFAULT " - - \n"
-                  "4  - - " COLOR_GREEN "2" COLOR_DEFAULT " - \n",
-                  field);
+    board->tiles[2][2]->value = 2;
+    board->tiles[2][2]->tile_state = OPEN;
+    board->tiles[3][3]->value = 3;
+    board->tiles[3][3]->tile_state = OPEN;
+    char *field = view_play_field(board, 1, 1);
+    ASSERT_STR_EQ(
+            "   1 2 3 4 \n"
+            "1  " COLOR_BOLD_RED "X" COLOR_DEFAULT " - - 0 \n"
+            "2  - " COLOR_BLUE "1" COLOR_DEFAULT " - - \n"
+            "3  - - "  COLOR_GREEN "2" COLOR_DEFAULT " - \n"
+            "4  - - - " COLOR_YELLOW "3" COLOR_DEFAULT " \n",
+            field);
     free(board);
     free(field);
     PASS();
