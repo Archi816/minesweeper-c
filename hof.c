@@ -15,7 +15,7 @@ int load_score_to_list(Player list_of_players[]) {
     FILE *file = fopen(hof_file, "r");
 
     if (file == NULL) {
-        return -1;
+        return 0;
     }
     int index_of_player = 0;
     while (fscanf(file, "%s %d", list_of_players[index_of_player].name,
