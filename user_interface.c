@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
-#include <ctype.h>
 #include <stdlib.h>
 
 #include "user_interface.h"
 #include "view.h"
+#include "str_utils.h"
 
 void print_play_field(Game *game, int input_row, int input_column);
 void print_score(Player *list_of_players, int number_of_all_players);
@@ -62,7 +62,7 @@ void read_player_name(Game *game) {
     printf("Zadajte vaše meno prosím: \n");
     char name_of_player[MAX_PLAYER_LENGTH];
     fgets(name_of_player, MAX_PLAYER_LENGTH, stdin);
-    remove_spaces_from_name(name_of_player);
+    str_remove_spaces(name_of_player);
     strcpy(game->player->name, name_of_player);
 }
 
@@ -89,14 +89,4 @@ void play_game(Game *game) {
     if (is_player_added_to_list) {
         save_players_to_file(list_of_players, size_of_list);
     }
-}
-
-
-void remove_spaces_from_name(char *name) {
-    const char *character = name;
-    do {
-        while (isspace(*character)) {
-            ++character;
-        }
-    } while ((*name++ = *character++));
 }

@@ -6,13 +6,13 @@ MKDIR_P := mkdir -p
 
 # Main compilation target and its source files
 MAIN_TARGET := mines
-MAIN_SRCS := main.c game.c board.c hall_of_fame.c user_interface.c view.c sb.c
+MAIN_SRCS := main.c game.c board.c hall_of_fame.c user_interface.c view.c str_utils.c sb.c
 
 # Tests compilation target and its source files
 TEST_TARGET := tests/all_tests
-TEST_SRCS := game.c board.c hall_of_fame.c user_interface.c view.c sb.c \
+TEST_SRCS := game.c board.c hall_of_fame.c user_interface.c view.c str_utils.c sb.c \
 	 tests/all_tests.c tests/test_game.c tests/test_board.c tests/test_view.c \
-	 tests/test_hall_of_fame.c tests/test_user_interface.c
+	 tests/test_hall_of_fame.c tests/test_str_utils.c
 
 # Build directory
 BUILD_DIR := ./build

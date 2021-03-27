@@ -14,9 +14,4 @@ void read_player_name(Game *game);
  */
 void play_game(Game *game);
 
-/**
-* Removes spaces from players name
-*/
-void remove_spaces_from_name(char *name);
-
 #endif
