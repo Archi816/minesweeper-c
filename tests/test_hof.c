@@ -2,26 +2,26 @@
 #include "../hof.h"
 
 TEST load_file_number_of_players() {
-    set_hof_file_name("tests/score/optimal_size");
+    char hof_file[] = "tests/score/optimal_size";
     Player list_of_players[PLAYERS_LIMIT];
 
-    ASSERT_EQ(5, load_score_to_list(list_of_players));
+    ASSERT_EQ(5, read_scores(hof_file, list_of_players));
     PASS();
 }
 
 TEST load_file_over_limit() {
-    set_hof_file_name("tests/score/over_size");
+    char hof_file[] = "tests/score/over_size";
     int high_size_of_list = PLAYERS_LIMIT + 5;
     Player list_of_players[high_size_of_list];
 
-    ASSERT_EQ(PLAYERS_LIMIT, load_score_to_list(list_of_players));
+    ASSERT_EQ(PLAYERS_LIMIT, read_scores(hof_file, list_of_players));
     PASS();
 }
 
 TEST load_nonexistent_file() {
-    set_hof_file_name("tests/score/nonexistent");
+    char hof_file[] = "tests/score/nonexistent";
     Player list_of_players[PLAYERS_LIMIT];
-    ASSERT_EQ(0, load_score_to_list(list_of_players));
+    ASSERT_EQ(0, read_scores(hof_file, list_of_players));
     PASS();
 }
 
@@ -32,20 +32,20 @@ TEST compare_loaded_and_saved_players() {
             {"alena", 43},
     };
     int size_of_input_list = 3;
-    set_hof_file_name("tests/score/for_saving");
+    char hof_file[] = "tests/score/for_saving";
 
-    save_players_to_file(list_of_players, size_of_input_list);
+    save_scores(hof_file, list_of_players, size_of_input_list);
     Player test_list_of_players[size_of_input_list];
     int size_of_test_list =
-            load_score_to_list(test_list_of_players);
+            read_scores(hof_file, test_list_of_players);
 
             ASSERT_EQ(size_of_input_list, size_of_test_list);
     for (int i = 0; i < size_of_test_list; i++) {
         ASSERT_EQ(list_of_players[i].score, test_list_of_players[i].score);
         ASSERT_STR_EQ(list_of_players[i].name, test_list_of_players[i].name);
     }
+    remove(hof_file);
     PASS();
-    remove("tests/score/for_saving");
 }
 
 TEST save_player_over_limit() {
@@ -62,14 +62,14 @@ TEST save_player_over_limit() {
             {"lubo",  2}
     };
     int size = PLAYERS_LIMIT + 1;
-    set_hof_file_name("tests/score/for_saving");
+    char hof_file[] = "tests/score/for_saving";
     Player *player = (Player *) calloc(1, sizeof(Player));
     strcpy(player->name, "lucia");
     player->score = 26;
 
     ASSERT_FALSE(add_player_to_list(list_of_players, &size, *player));
     free(player);
-    remove("tests/score/for_saving");
+    remove(hof_file);
     PASS();
 }
 
@@ -88,7 +88,6 @@ TEST add_player_to_optimal_list() {
     add_player_to_list(list_of_players, &size, *player);
     ASSERT_EQ(size_before_adding + 1, size);
     free(player);
-    remove("tests/score/for_saving");
     PASS();
 }
 

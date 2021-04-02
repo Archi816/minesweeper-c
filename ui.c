@@ -7,6 +7,8 @@
 #include "view.h"
 #include "str_utils.h"
 
+#define HOF_FILENAME "score.txt"
+
 /* private functions */
 void game_loop(Game *game);
 void print_play_field(Game *game, int input_row, int input_column);
@@ -34,7 +36,7 @@ void play_game(Game *game) {
     assert(game != NULL);
 
     Player list_of_players[PLAYERS_LIMIT];
-    int size_of_list = load_score_to_list(list_of_players);
+    int size_of_list = read_scores(HOF_FILENAME, list_of_players);
     if (size_of_list > 0) {
         print_score(list_of_players, size_of_list);
     }
@@ -51,7 +53,7 @@ void play_game(Game *game) {
             add_player_to_list(list_of_players, &size_of_list, *game->player);
 
     if (is_player_added_to_list) {
-        save_players_to_file(list_of_players, size_of_list);
+        save_scores(HOF_FILENAME, list_of_players, size_of_list);
     }
 }
 

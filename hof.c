@@ -4,18 +4,15 @@
 #include <string.h>
 #include <assert.h>
 
-// hall of fame file name
-#define HOF_FILENAME_LENGTH 80
-static char hof_file[HOF_FILENAME_LENGTH] = "score";
 
 /**
  * Load hall of fame from the file
  * @return the number of loaded entries or 0, if there was error in loading
  */
-int load_score_to_list(Player list_of_players[]) {
-
+int read_scores(char *filename, Player *list_of_players) {
+    assert(filename != NULL);
     assert(list_of_players != NULL);
-    FILE *file = fopen(hof_file, "r");
+    FILE *file = fopen(filename, "r");
 
     if (file == NULL) {
         return 0;
@@ -36,9 +33,10 @@ int load_score_to_list(Player list_of_players[]) {
 /**
  * Save the hall of fame array to the file
  */
-void save_players_to_file(Player list_of_players[], const int size) {
+void save_scores(char *filename, Player *list_of_players, const int size) {
+    assert(filename != NULL);
     assert(list_of_players != NULL);
-    FILE *file = fopen(hof_file, "w");
+    FILE *file = fopen(filename, "w");
 
     if (file == NULL) { return; }
     for (int i = 0; i < size; i++) {
@@ -66,12 +64,4 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
     }
 
     return true;
-}
-
-
-/**
- * Change the name of the hall of fame file
- */
-void set_hof_file_name(const char name[]) {
-    strncpy(hof_file, name, HOF_FILENAME_LENGTH);
 }

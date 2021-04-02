@@ -14,8 +14,8 @@ typedef struct {
     int score;                          /* value of score */
 } Player;
 
-int load_score_to_list(Player list_of_players[]);
-void save_players_to_file(Player list_of_players[], const int size_of_list);
+int read_scores(char *filename, Player *list_of_players);
+void save_scores(char *filename, Player *list_of_players, const int size);
 bool add_player_to_list(Player list_of_players[], int *size_of_list, const Player player);
 void set_hof_file_name(const char name[]);
 
