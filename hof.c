@@ -4,11 +4,14 @@
 #include <string.h>
 #include <assert.h>
 
-
 // hall of fame file name
 #define HOF_FILENAME_LENGTH 80
 static char hof_file[HOF_FILENAME_LENGTH] = "score";
 
+/**
+ * Load hall of fame from the file
+ * @return the number of loaded entries or 0, if there was error in loading
+ */
 int load_score_to_list(Player list_of_players[]) {
 
     assert(list_of_players != NULL);
@@ -29,6 +32,10 @@ int load_score_to_list(Player list_of_players[]) {
     return index_of_player;
 }
 
+
+/**
+ * Save the hall of fame array to the file
+ */
 void save_players_to_file(Player list_of_players[], const int size) {
     assert(list_of_players != NULL);
     FILE *file = fopen(hof_file, "w");
@@ -42,6 +49,11 @@ void save_players_to_file(Player list_of_players[], const int size) {
     fclose(file);
 }
 
+
+/**
+ * Add Player to the hall of fame array
+ * @return true, if Player (entry) was added to the list, false otherwise
+ */
 bool add_player_to_list(Player list_of_players[], int *size_of_list, const Player player) {
     assert(list_of_players != NULL && size_of_list != NULL);
 
@@ -56,6 +68,10 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
     return true;
 }
 
+
+/**
+ * Change the name of the hall of fame file
+ */
 void set_hof_file_name(const char name[]) {
     strncpy(hof_file, name, HOF_FILENAME_LENGTH);
 }

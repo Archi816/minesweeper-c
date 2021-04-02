@@ -1,10 +1,11 @@
-#include "board.h"
+#include <assert.h>
 #include <stdlib.h>
 #include <time.h>
-#include <assert.h>
+#include "board.h"
+
 
 /**
- * Checks if mine is on the current Tile
+ * Check if mine is on the current Tile.
  * @return true if Tile has mine on or false otherwise
  */
 bool is_mine_on(Board *board, int row, int column) {
@@ -14,8 +15,9 @@ bool is_mine_on(Board *board, int row, int column) {
            && board->tiles[row][column]->is_mine;
 }
 
+
 /**
- * Counts number of mines interacted with Tile
+ * Count number of mines interacted with Tile.
  * @return count of mines
  */
 int count_neighbour_mines(Board *board, int row, int column) {
@@ -33,9 +35,10 @@ int count_neighbour_mines(Board *board, int row, int column) {
     return count;
 }
 
+
 /**
- * Set values to tiles according to neighbour mines count
- * If Tile is a mine then value is set to -1
+ * Set values to tiles according to neighbour mines count.
+ * If Tile is a mine then value is set to -1.
  */
 void set_tile_values(Board *board) {
     assert(board != NULL);
@@ -53,8 +56,9 @@ void set_tile_values(Board *board) {
     }
 }
 
+
 /**
- * When Game is won all mines are shown as marked
+ * When Game is won all mines are shown as marked.
  */
 void mark_all_mines(Board *board) {
     assert(board != NULL);
@@ -67,16 +71,18 @@ void mark_all_mines(Board *board) {
     }
 }
 
+
 /**
- * Generates random value from 0 to upper range of the border
+ * Generate random value from 0 to upper range of the border.
  * @return random number in range 0 to upper_range param
  */
 int generate_random_coordinates(int upper_range) {
     return rand() % upper_range;
 }
 
+
 /**
- * Generates random coordinates to row and column according to mine count value
+ * Generate random coordinates to row and column according to mine count value.
  * Randomly sets mines to the Board pointer
  */
 void set_mines_randomly(Board *board) {
@@ -96,6 +102,11 @@ void set_mines_randomly(Board *board) {
     }
 }
 
+
+/**
+ * Create and allocate pointer of the Board.
+ * @return pointer of the Board
+ */
 Board *create_board(int row_count, int column_count, int mine_count) {
     Board *board = (Board *) calloc(1, sizeof(Board));
     board->row_count = row_count;
@@ -114,6 +125,10 @@ Board *create_board(int row_count, int column_count, int mine_count) {
     return board;
 }
 
+
+/**
+ * Free the Board and each Tile.
+ */
 void destroy_board(Board *board) {
     assert(board != NULL);
 
@@ -125,6 +140,11 @@ void destroy_board(Board *board) {
     free(board);
 }
 
+
+/**
+ * Check if Game is solved.
+ * @return false if Board consists of any Tile which is closed and has clue value, else true
+ */
 bool is_game_solved(Board *board) {
     assert(board != NULL);
     for (int row = 0; row < board->row_count; row++) {
@@ -139,12 +159,21 @@ bool is_game_solved(Board *board) {
     return true;
 }
 
+
+/**
+ * Check if input row and column are within correct range.
+ * @return true if input coordinates are within the range, false otherwise
+ */
 bool is_input_data_correct(Board *board, int input_row, int input_column) {
     assert(board != NULL);
     return input_row >= 0 && board->row_count > input_row
            && input_column >= 0 && board->column_count > input_column;
 }
 
+
+/**
+ * If Game is lost all mines are shown.
+ */
 void open_all_mines(Board *board) {
     assert(board != NULL);
     for (int row = 0; row < board->row_count; row++) {

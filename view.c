@@ -29,7 +29,7 @@ char *view_hof(Player *players, int players_count) {
 
 
 /**
- * Returns whole play field
+ * Return whole play field
  */
 char *view_play_field(Board *board, int input_row, int input_column) {
     assert(board != NULL);
@@ -57,7 +57,7 @@ char *view_play_field(Board *board, int input_row, int input_column) {
 
 
 /**
- * Enumerates columns beyond play field
+ * Enumerate columns beyond play field
  */
 void view_column_coordinates(StringBuilder *sb, int column_count) {
     sb_append(sb, "   ");
@@ -69,7 +69,7 @@ void view_column_coordinates(StringBuilder *sb, int column_count) {
 
 
 /**
- * Prints one single Tile
+ * Generate one single Tile
  */
 void view_tile(StringBuilder *sb, Tile *tile, bool is_mine_on_selected_tile) {
     assert(tile != NULL);

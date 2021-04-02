@@ -1,12 +1,12 @@
 #include <stdlib.h>
 #include <assert.h>
 #include "game.h"
-#include "board.h"
+
 
 /**
- * Changes players score
- * Adds value of opened tile to score
- * if game is solved/failed then multiples/divide score times 2
+ * Change players score.
+ * Adds value of opened tile to the score.
+ * If game is solved/failed then multiples/divide the score by 2.
  */
 void update_player_score(Game *game, int input_row, int input_column) {
 
@@ -21,9 +21,10 @@ void update_player_score(Game *game, int input_row, int input_column) {
     }
 }
 
+
 /**
- * Opens neighbour Tile if value of the clue is 0
- * Checks main and mixed directions of the opened Tile
+ * Open neighbour Tile if value of the clue is 0.
+ * Checks main and mixed directions of the opened Tile.
  */
 void open_neighbour_tiles(Game *game, int row, int column) {
     assert(game != NULL);
@@ -40,6 +41,12 @@ void open_neighbour_tiles(Game *game, int row, int column) {
     }
 }
 
+
+/**
+ * Create and allocate pointers of a Board, Player and Game.
+ * Sets Game state to PLAYING.
+ * @return pointer to the Game
+ */
 Game *create_game() {
     Game *game = (Game *) calloc(1, sizeof(Game));
     Player *player = (Player *) calloc(1, sizeof(Player));
@@ -49,6 +56,12 @@ Game *create_game() {
     return game;
 }
 
+
+/**
+ * Open selected Tile(s) according to input coordinates.
+ * Checks if input coordinates are in the correct range if Game state is playing.
+ * Can change Game state to solved or failed.
+ */
 void open_tile(Game *game, int input_row, int input_column) {
 
     if (game->game_state != PLAYING
@@ -75,6 +88,10 @@ void open_tile(Game *game, int input_row, int input_column) {
     }
 }
 
+
+/**
+ * Free pointers of the Player and Game.
+ */
 void destroy_game(Game *game) {
     assert(game != NULL);
     destroy_board(game->board);

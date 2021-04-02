@@ -1,5 +1,5 @@
-#ifndef _COLOR_TERM_H
-#define _COLOR_TERM_H
+#ifndef MINES_COLOR_TERM_H
+#define MINES_COLOR_TERM_H
 
 typedef char * Color;
 
@@ -17,4 +17,4 @@ typedef char * Color;
 #define COLOR_BOLD_CYAN     "\033[1;36m"
 #define COLOR_DEFAULT       "\033[0m"
 
-#endif
+#endif //MINES_COLOR_TERM_H
