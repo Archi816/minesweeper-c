@@ -5,6 +5,4 @@
 /.idea
 /.vscode/c_cpp_properties.json
 /build
-/cmake-build-debug
-/CMakeLists.txt
-/score
+/score.txt
