@@ -54,4 +54,5 @@ Tento projekt je distribuovaný v súlade s podmienkami [licencie MIT](LICENSE).
 ## Poďakovanie
 
 * Inšpirované projektom  [Minesweeper](https://git.kpi.fei.tuke.sk/jaroslav.poruban/gamestudio2019)
+* Zahrňa knižnicu [C String Builder](https://github.com/cavaliercoder/c-stringbuilder)
 * Zahrňa knižnicu pre jednotkové testovanie [greatest](https://github.com/silentbicycle/greatest/)
