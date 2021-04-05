@@ -2,7 +2,6 @@
 *.gcno
 *.gcov
 *.o
-/.idea
 /.vscode/c_cpp_properties.json
 /build
 /score.txt
