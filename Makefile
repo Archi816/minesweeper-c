@@ -22,13 +22,22 @@ TEST_OBJS := $(addprefix $(BUILD_DIR)/,$(TEST_SRCS:.c=.o))
 ALL_OBJS = $(MAIN_OBJS) $(TEST_OBJS)
 
 # Main tasks
-.PHONY: all test coverage clean
+.PHONY: all build build_tests test coverage clean
 
-all: $(BUILD_DIR)/$(MAIN_TARGET) $(BUILD_DIR)/$(TEST_TARGET)
+# Build everything
+all: build build_tests
 
-test: $(BUILD_DIR)/$(TEST_TARGET)
-	$<
+# Build game
+build: $(BUILD_DIR)/$(MAIN_TARGET)
 
+# Build tests
+build_tests: $(BUILD_DIR)/$(TEST_TARGET)
+
+# Run tests
+test: build/tests/all_tests
+	$<  # Just run the source
+
+# Calculate test coverage
 coverage:
 	gcov $(MAIN_OBJS)
 

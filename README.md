@@ -16,6 +16,8 @@ Pre chod programu a možnosť vývoja sú potrebné tieto nástroje.
 Na kompiláciu programu a ďalšie úlohy súvisiace s vývojom sa používa nástroj `make`. Priložený [Makefile](Makefile) definuje nasledovné ciele:
 
 - `make` alebo `make all` — skompiluje hru a testy
+- `make build` — skompiluje iba hru
+- `make build_tests` — skompiluje iba testy  
 - `make test` — spúšťa jednotkové testy projektu
 - `make coverage` — zobrazuje pokrytie kódu jednotlivých modulov testmi
 - `make clean` — odstraňuje všetky skompilované súbory
