@@ -17,6 +17,5 @@ typedef struct {
 int read_scores(char *filename, Player *list_of_players);
 void save_scores(char *filename, Player *list_of_players, const int size);
 bool add_player_to_list(Player list_of_players[], int *size_of_list, const Player player);
-void set_hof_file_name(const char name[]);
 
 #endif //MINES_HOF_H
