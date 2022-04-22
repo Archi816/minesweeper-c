@@ -74,7 +74,7 @@ void game_loop(Game *game) {
             print_input_rules();
         }
         if (input != EOF) {
-            // if input is not empty or is not correct then open tile
+            // if input is not empty and is correct then open the tile
             open_tile(game, input_row - 1, input_column - 1);
         }
 
