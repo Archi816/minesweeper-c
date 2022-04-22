@@ -15,7 +15,8 @@ typedef enum {
 typedef struct {
     bool is_mine;                /* Records if mine is on the Tile */
     TileState tile_state;        /* Enum for status of the Tile state */
-    int value;                   /* Number of neighbour tiles where is mine on; -1 if mine is not on */
+    int value;                   /* Number of neighbour tiles with mines,
+                                    or -1 if the tile contains a mine */
 } Tile;
 
 typedef struct {
