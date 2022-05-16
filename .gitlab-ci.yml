@@ -22,3 +22,4 @@ test:
   script:
     - make test
     - gcovr -e tests -e sb
+  coverage: '/^TOTAL.*\s+(\d+\%)$/'
