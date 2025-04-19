@@ -12,7 +12,6 @@ int compare_scores(const void *a, const void *b) {
     return (player_b->score - player_a->score);
 }
 
-
 /**
  * Load hall of fame from the file
  * @return the number of loaded entries or 0, if there was error in loading
@@ -42,9 +41,6 @@ int read_scores(char *filename, Player *list_of_players) {
     return index_of_player;
 }
 
-
-
-
 /**
  * Save the hall of fame array to the file
  */
@@ -62,9 +58,6 @@ void save_scores(char *filename, Player *list_of_players, const int size) {
     fclose(file);
 }
 
-
-
-
 /**
  * Add Player to the hall of fame array
  * @return true, if Player (entry) was added to the list, false otherwise
@@ -72,7 +65,7 @@ void save_scores(char *filename, Player *list_of_players, const int size) {
 bool add_player_to_list(Player list_of_players[], int *size_of_list, const Player player) {
     assert(list_of_players != NULL && size_of_list != NULL);
 
-    if (*size_of_list <= PLAYERS_LIMIT) {
+    if (*size_of_list < PLAYERS_LIMIT) {
         bool is_player_added = false;
         int insert_index = -1;
         if (*size_of_list == 0) {
@@ -81,7 +74,6 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
             return true;
         }
     
-
         for (int i = 0; i < *size_of_list; i++) {
             if (player.score >= list_of_players[i].score) {
                 insert_index = i;
@@ -92,10 +84,6 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
                 }
             }
         }
-
-
-
-
 
         if (insert_index != -1 && !is_player_added) {
             for (int j = *size_of_list; j > insert_index; j--) {
