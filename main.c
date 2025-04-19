@@ -20,6 +20,6 @@ int main() {
     read_player_name(game);
     play_game(game);
     destroy_game(game);
-    }  while (play_again());
+    } while (play_again());
     exit (EXIT_SUCCESS);
 }
