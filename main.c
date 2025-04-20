@@ -5,7 +5,7 @@
 #include "board.h"
 
   bool play_again(){
-   char choice = '\0';
+   char choice;
    printf("Chceli by ste si zahrať znova? (y/n) ");
    scanf(" %c", &choice);
    return choice == 'y';
