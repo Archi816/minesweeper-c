@@ -6,6 +6,23 @@
 void flag_tile(Game *game, int row, int column);
 
 /**
+ * Move mine from the first clicked tile to a random safe tile.
+ */
+void move_mine(Board *board, int first_row, int first_column) {
+    int new_row = rand() % board->row_count;
+    int new_column = rand() % board->column_count;
+
+    while (board->tiles[new_row][new_column]->is_mine ||
+           (new_row == first_row && new_column == first_column)) {
+        new_row = rand() % board->row_count;
+        new_column = rand() % board->column_count;
+    }
+
+    board->tiles[new_row][new_column]->is_mine = 1;
+    board->tiles[first_row][first_column]->is_mine = 0;
+}
+
+/**
  * Change players score.
  * Adds value of opened tile to the score.
  * If game is solved/failed then multiples/divide the score by 2.
@@ -64,13 +81,18 @@ Game *create_game() {
  * Can change Game state to solved or failed.
  */
 void open_tile(Game *game, int input_row, int input_column) {
-
     if (game->game_state != PLAYING
         || !is_input_data_correct(game->board, input_row, input_column)) {
         return;
     }
 
     if (game->board->tiles[input_row][input_column]->tile_state != OPEN) {
+        if (game->player->score == 1 &&
+            game->board->tiles[input_row][input_column]->is_mine) {
+            move_mine(game->board, input_row, input_column);
+            generate_board_values(game->board); // оновлюємо підказки
+        }
+
         game->board->tiles[input_row][input_column]->tile_state = OPEN;
 
         if (game->board->tiles[input_row][input_column]->is_mine) {
@@ -78,18 +100,20 @@ void open_tile(Game *game, int input_row, int input_column) {
             open_all_mines(game->board);
         }
 
-
-
-        if (!game->board->tiles[input_row][input_column]->is_mine
-            && game->board->tiles[input_row][input_column]->value == 0) {
+        if (!game->board->tiles[input_row][input_column]->is_mine &&
+            game->board->tiles[input_row][input_column]->value == 0) {
             open_neighbour_tiles(game, input_row, input_column);
         }
+
         if (is_game_solved(game->board)) {
             game->game_state = SOLVED;
         }
+
         update_player_score(game, input_row, input_column);
     }
 }
+
+
 
 void flag_tile(Game *game, int input_row, int input_column) {
     if (game->game_state != PLAYING || !is_input_data_correct(game->board, input_row, input_column)) {
