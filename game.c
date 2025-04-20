@@ -12,15 +12,15 @@ void flag_tile(Game *game, int row, int column);
  */
 void update_player_score(Game *game, int input_row, int input_column) {
 
-            if (game->game_state == FAILED) {
-                game->player->score /= 2;
-            } else {
-                game->player->score +=
-                        game->board->tiles[input_row][input_column]->value;
-            }
-            if (game->game_state == SOLVED) {
-                game->player->score *= 2;
-            }
+    if (game->game_state == FAILED) {
+        game->player->score /= 2;
+    } else {
+        game->player->score +=
+        game->board->tiles[input_row][input_column]->value;
+    }
+    if (game->game_state == SOLVED) {
+        game->player->score *= 2;
+    }
 }
 
 
@@ -42,9 +42,6 @@ void open_neighbour_tiles(Game *game, int row, int column) {
             }
         }
 }
-
-/***********************************************/
-
 
 /**
  * Create and allocate pointers of a Board, Player and Game.
@@ -95,19 +92,19 @@ void open_tile(Game *game, int input_row, int input_column) {
 }
 
 void flag_tile(Game *game, int input_row, int input_column) {
-        if (game->game_state != PLAYING || !is_input_data_correct(game->board, input_row, input_column)) {
-            return;
-        }
+    if (game->game_state != PLAYING || !is_input_data_correct(game->board, input_row, input_column)) {
+        return;
+    }
 
 
 
-        if (game->board->tiles[input_row][input_column]->tile_state == OPEN) {
-            printf("The tile is already open, can't flag it.\n");
-        } else if (game->board->tiles[input_row][input_column]->tile_state == MARKED) {
-            printf("The tile is already flaged.\n");
-        } else if (game->board->tiles[input_row][input_column]->tile_state == CLOSED) {
-            game->board->tiles[input_row][input_column]->tile_state = MARKED;
-        }
+    if (game->board->tiles[input_row][input_column]->tile_state == OPEN) {
+        printf("The tile is already open, can't flag it.\n");
+    } else if (game->board->tiles[input_row][input_column]->tile_state == MARKED) {
+        printf("The tile is already flaged.\n");
+    } else if (game->board->tiles[input_row][input_column]->tile_state == CLOSED) {
+        game->board->tiles[input_row][input_column]->tile_state = MARKED;
+    }
 }
 
 /**

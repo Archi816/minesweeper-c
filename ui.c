@@ -23,7 +23,6 @@ void flag_tile(Game *game, int row, int column);
  */
 void read_player_name(Game *game) {
     assert(game != NULL);
-
     printf("Zadajte vaše meno prosím: \n");
 
     char name_of_player[MAX_PLAYER_LENGTH];
