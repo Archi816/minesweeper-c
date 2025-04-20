@@ -80,38 +80,33 @@ Game *create_game() {
  * Checks if input coordinates are in the correct range if Game state is playing.
  * Can change Game state to solved or failed.
  */
+
 void open_tile(Game *game, int input_row, int input_column) {
     if (game->game_state != PLAYING
         || !is_input_data_correct(game->board, input_row, input_column)) {
         return;
     }
 
-    if (game->board->tiles[input_row][input_column]->tile_state != OPEN) {
-        if (game->player->score == 1 &&
-            game->board->tiles[input_row][input_column]->is_mine) {
-            move_mine(game->board, input_row, input_column);
-            generate_board_values(game->board); // оновлюємо підказки
+    if (game->board->tiles[input_row][input_column]->tile_state == CLOSED) {
+        if (game->board->tiles[input_row][input_column]->is_mine) {
+            game->game_state = FAILED;
+            open_all_mines(game->board);
+            game->player->score /= 2; // Halve player's score when game fails
+            return;
         }
 
         game->board->tiles[input_row][input_column]->tile_state = OPEN;
 
-        if (game->board->tiles[input_row][input_column]->is_mine) {
-            game->game_state = FAILED;
-            open_all_mines(game->board);
-        }
-
-        if (!game->board->tiles[input_row][input_column]->is_mine &&
-            game->board->tiles[input_row][input_column]->value == 0) {
+        if (game->board->tiles[input_row][input_column]->value == 0) {
             open_neighbour_tiles(game, input_row, input_column);
         }
-
         if (is_game_solved(game->board)) {
             game->game_state = SOLVED;
         }
-
         update_player_score(game, input_row, input_column);
     }
 }
+
 
 
 
