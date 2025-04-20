@@ -97,7 +97,6 @@ void flag_tile(Game *game, int input_row, int input_column) {
     }
 
 
-
     if (game->board->tiles[input_row][input_column]->tile_state == OPEN) {
         printf("The tile is already open, can't flag it.\n");
     } else if (game->board->tiles[input_row][input_column]->tile_state == MARKED) {
