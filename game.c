@@ -22,6 +22,7 @@ void move_mine(Board *board, int first_row, int first_column) {
     board->tiles[first_row][first_column]->is_mine = 0;
 }
 
+
 /**
  * Change players score.
  * Adds value of opened tile to the score.
