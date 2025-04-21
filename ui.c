@@ -20,7 +20,7 @@ void print_input_rules();
  * Ask a player for his name and store in the game.
  */
 void read_player_name(Game *game) {
-    assert(game != NULL);
+    assert(game!= NULL); 
     printf("Zadajte vaše meno prosím: \n");
     char name_of_player[MAX_PLAYER_LENGTH];
     fgets(name_of_player, MAX_PLAYER_LENGTH, stdin);
