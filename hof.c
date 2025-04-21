@@ -104,3 +104,4 @@ bool add_player_to_list(Player list_of_players[], int *size_of_list, const Playe
 
     return false;
 }
+
