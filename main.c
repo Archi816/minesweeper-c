@@ -30,25 +30,24 @@ int get_valid_input(const char *prompt, int min, int max) {
 }
 
 
+void start_game_round(int rows, int columns, int mines) {
+    Game *game = create_game();
+    Board *board = create_board(rows, columns, mines);
+    game->board = board;
+    read_player_name(game);
+    play_game(game);
+    destroy_game(game);
+}
+
 int main() {
     do {
-
-
-
         int rows = get_valid_input("Zadajte počet riadkov", 1, 25);
         int columns = get_valid_input("Zadajte počet stĺpcov", 1, 25);
         int max_mines = rows * columns - 1;
         int mines = get_valid_input("Zadajte počet mín", 1, max_mines);
 
-        Game *game = create_game();
-        Board *board = create_board(rows, columns, mines);
-        game->board = board;
-        read_player_name(game);
-        play_game(game);
-        destroy_game(game);
+        start_game_round(rows, columns, mines);
     } while (play_again());
 
     exit(EXIT_SUCCESS);
 }
-
-
