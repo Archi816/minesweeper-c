@@ -14,7 +14,6 @@ typedef struct {
     int score;                          /* value of score */
 } Player;
 
-int compare_scores(const void *a, const void *b);
 int read_scores(char *filename, Player *list_of_players);
 void save_scores(char *filename, Player *list_of_players, const int size);
 bool add_player_to_list(Player list_of_players[], int *size_of_list, const Player player);
