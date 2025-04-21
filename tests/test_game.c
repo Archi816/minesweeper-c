@@ -74,35 +74,9 @@ TEST count_score_when_game_failed() {
     PASS();
 }
 
-TEST can_flag_a_tile() {
-    Game *game = create_game();
-    Board *board = create_board(10,10,30);
-    game->board =board;
-    game->player->score=30;
-
-    game->board->tiles[0][1]->tile_state = CLOSED;
-    game->board->tiles[0][2]->tile_state=OPEN;
-    game->board->tiles[0][3]->tile_state=MARKED;
-
-
-    for(int i = 1;i<4;i++){
-        flag_tile(game, 0,i);
-    }
-
-            ASSERT_EQ(MARKED, game->board->tiles[0][1]->tile_state);
-            ASSERT_EQ(OPEN, game->board->tiles[0][2]->tile_state);
-            ASSERT_EQ(MARKED, game->board->tiles[0][3]->tile_state);
-
-    destroy_game(game);
-            PASS();
-}
-
 SUITE (test_game) {
-            RUN_TEST(open_mine);
-            RUN_TEST(open_tile_with_bad_coordinates);
-            RUN_TEST(count_score_after_move);
-            RUN_TEST(count_score_when_game_failed);
-            RUN_TEST(can_flag_a_tile);
+    RUN_TEST(open_mine);
+    RUN_TEST(open_tile_with_bad_coordinates);
+    RUN_TEST(count_score_after_move);
+    RUN_TEST(count_score_when_game_failed);
 }
-
-

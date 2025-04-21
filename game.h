@@ -18,7 +18,5 @@ typedef struct {
 Game *create_game();
 void open_tile(Game *game, int input_row, int input_column);
 void destroy_game(Game *game);
-void flag_tile(Game *game, int row, int column);
-
 
 #endif //MINES_GAME_H
