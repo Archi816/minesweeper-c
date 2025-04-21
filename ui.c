@@ -22,6 +22,7 @@ void print_input_rules();
 void read_player_name(Game *game) {
     assert(game != NULL);
     printf("Zadajte vaše meno prosím: \n");
+    while (getchar() != '\n');
     char name_of_player[MAX_PLAYER_LENGTH];
     fgets(name_of_player, MAX_PLAYER_LENGTH, stdin);
     str_remove_spaces(name_of_player);
