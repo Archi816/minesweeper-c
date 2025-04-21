@@ -5,6 +5,7 @@
 
 void flag_tile(Game *game, int row, int column);
 
+
 /**
  * Change players score.
  * Adds value of opened tile to the score.
