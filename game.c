@@ -40,7 +40,6 @@ void update_player_score(Game *game, int input_row, int input_column) {
     }
 }
 
-
 /**
  * Open neighbour Tile if value of the clue is 0.
  * Checks main and mixed directions of the opened Tile.
@@ -74,13 +73,11 @@ Game *create_game() {
     return game;
 }
 
-
 /**
  * Open selected Tile(s) according to input coordinates.
  * Checks if input coordinates are in the correct range if Game state is playing.
  * Can change Game state to solved or failed.
  */
-
 void open_tile(Game *game, int input_row, int input_column) {
     if (game->game_state != PLAYING
         || !is_input_data_correct(game->board, input_row, input_column)) {
@@ -107,15 +104,10 @@ void open_tile(Game *game, int input_row, int input_column) {
     }
 }
 
-
-
-
 void flag_tile(Game *game, int input_row, int input_column) {
     if (game->game_state != PLAYING || !is_input_data_correct(game->board, input_row, input_column)) {
         return;
     }
-
-
 
     if (game->board->tiles[input_row][input_column]->tile_state == OPEN) {
         printf("The tile is already open, can't flag it.\n");
@@ -130,9 +122,7 @@ void flag_tile(Game *game, int input_row, int input_column) {
  * Free pointers of the Player and Game.
  */
 void destroy_game(Game *game) {
-    for (int i = 0; i < 5; ++i) {
 
-    }
     assert(game != NULL);
     destroy_board(game->board);
     free(game->player);
