@@ -91,6 +91,41 @@ TEST add_player_to_optimal_list() {
     PASS();
 }
 
+TEST test_add_player_in_order() {
+    Player list_of_players[PLAYERS_LIMIT] = {
+        {"Henry", 22},
+        {"Alis", 0},
+        {"Bob", 15},
+        {"Alfred", 10},
+        {"Tomas", 5},
+        {"Kate", 30}
+    };
+    int size_of_list = 6;
+
+    const int NUM_NEW_PLAYERS = 2;
+    Player new_players[2] = {
+        {"player7", 20},
+        {"player8", 0}
+    };
+
+    char hof_file[] = "tests/score/add_in_order";
+
+    for (int i = 0; i < NUM_NEW_PLAYERS; i++) {
+        add_player_to_list(list_of_players, &size_of_list, new_players[i]);
+    }
+
+    save_scores(hof_file, list_of_players, size_of_list);
+
+    for (int i = 0; i < size_of_list - 1; i++) {
+        ASSERT_EQ(1, list_of_players[i].score >= list_of_players[i + 1].score);
+    }
+
+    remove(hof_file);
+
+    PASS();
+} 
+
+
 SUITE (test_hall_of_fame) {
     RUN_TEST(load_file_number_of_players);
     RUN_TEST(load_file_over_limit);
@@ -98,4 +133,5 @@ SUITE (test_hall_of_fame) {
     RUN_TEST(compare_loaded_and_saved_players);
     RUN_TEST(save_player_over_limit);
     RUN_TEST(add_player_to_optimal_list);
+    RUN_TEST(test_add_player_in_order);
 }

@@ -1,0 +1,7 @@
+Henry 22
+Alis 0
+Bob 15
+Alfred 10
+Tomas 5
+Kate 30
+
