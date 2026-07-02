@@ -12,16 +12,17 @@ First-year university project.
 ## Compile & Run
 
 ```bash
-make
+make build
 ./build/mines
 ```
 
 ## Other commands
 
 ```bash
-make test      # run unit tests
-make coverage  # show code coverage
-make clean     # remove compiled files
+make              # build game + tests
+make test         # run unit tests
+make coverage     # show code coverage per module
+make clean        # remove compiled files
 ```
 
 ## Tech Stack
